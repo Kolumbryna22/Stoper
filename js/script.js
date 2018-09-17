@@ -59,9 +59,8 @@
         }
 
         addResult() {
-            let resultList = document.getElementById('result');
             let li = document.createElement("li");
-            
+
             console.log(this.format(this.times));
             
             li.innerHTML = this.format(this.times);
@@ -73,6 +72,7 @@
     let startButton = document.getElementById('start');
     let stopButton = document.getElementById('stop');
     let resetButton = document.getElementById('reset');
+    let resultList = document.getElementById('result');
 
     startButton.addEventListener('click', () => stopWatch.start());
     stopButton.addEventListener('click', () => stopWatch.stop());

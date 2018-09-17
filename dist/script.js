@@ -62,6 +62,8 @@
             let resultList = document.getElementById('result');
             let li = document.createElement("li");
 
+            console.log(this.format(this.times));
+
             li.innerHTML = this.format(this.times);
             resultList.appendChild(li);
         }

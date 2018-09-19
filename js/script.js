@@ -8,7 +8,7 @@
         }
 
         reset(working) {
-            //if (working) this.addResult();
+            if (working) this.addResult();
             this.times = {
                 minutes: 0,
                 seconds: 0,

@@ -79,9 +79,9 @@ class App extends React.Component {
         return (
             <div className="stoper-container">
                 <div class="controls">
-                    <a href="#" className="button">Start</a>
-                    <a href="#" className="button">Stop</a>
-                    <a href="#" className="button">Reset</a>
+                    <a href="#" className="button" onClick={start}>Start</a>
+                    <a href="#" className="button" onClick={stop}>Stop</a>
+                    <a href="#" className="button" onClick={reset(true)}>Reset</a>
                 </div>
                 <div className="stop-watch"></div>
                 <ul className="results"></ul>
@@ -89,14 +89,3 @@ class App extends React.Component {
         );
     }
 }
-
-//     const stopWatch = new StopWatch(document.getElementById('stoper'));
-//     let startButton = document.getElementById('start');
-//     let stopButton = document.getElementById('stop');
-//     let resetButton = document.getElementById('reset');
-//     let resultList = document.getElementById('result');
-
-//     startButton.addEventListener('click', () => stopWatch.start());
-//     stopButton.addEventListener('click', () => stopWatch.stop());
-//     resetButton.addEventListener('click', () => stopWatch.reset(true));
-// }

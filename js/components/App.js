@@ -17,7 +17,7 @@ class App extends React.Component {
         this.state.times = {
             minutes: 0,
             seconds: 0,
-            miliseconds: 0,            
+            miliseconds: 0,
         };
         this.print();
     }

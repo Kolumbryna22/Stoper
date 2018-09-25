@@ -3,14 +3,17 @@ class App extends React.Component {
         super(props);
         this.state = {
             running: false,
-            display: display,
+            display: '',
         }
-        reset(false);
-        print(this.time);
+        this.reset(false);
+        this.print(this.time);
+        this.start = this.start.bind(this);
+        this.stop = this.stop.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     reset(working) {
-        //if (working) this.addResult();
+        if (working) this.addResult();
         this.state.times = {
             minutes: 0,
             seconds: 0,
@@ -20,11 +23,11 @@ class App extends React.Component {
     }
 
     print() {
-        this.state.display.innerText = this.format(this.state.times);
+        this.setState({display: this.format(this.state.times)});
     }
 
     format(times) {
-        return `${pad0(times.minutes)}:${pad0(times.seconds)}:${pad0(Math.floor(times.miliseconds))}`;
+        return `${this.pad0(times.minutes)}:${this.pad0(times.seconds)}:${this.pad0(Math.floor(times.miliseconds))}`;
     }
 
     start() {
@@ -62,10 +65,9 @@ class App extends React.Component {
 
     addResult() {
         let li = document.createElement("li");
-
-        console.log(this.format(this.times));
+        let resultList = document.getElementById("results");
             
-        li.innerHTML = this.format(this.times);
+        li.innerHTML = this.format(this.state.times);
         resultList.appendChild(li);
     }
     
@@ -78,13 +80,13 @@ class App extends React.Component {
     render() {
         return (
             <div className="stoper-container">
-                <div class="controls">
-                    <a href="#" className="button" onClick={start}>Start</a>
-                    <a href="#" className="button" onClick={stop}>Stop</a>
-                    <a href="#" className="button" onClick={reset(true)}>Reset</a>
+                <div className="controls">
+                    <a href="#" className="button" onClick={this.start}>Start</a>
+                    <a href="#" className="button" onClick={this.stop}>Stop</a>
+                    <a href="#" className="button" onClick={this.reset}>Reset</a>
                 </div>
-                <div className="stop-watch"></div>
-                <ul className="results"></ul>
+                <div className="stop-watch">{this.state.display}</div>
+                <ul className="results" id="results"></ul>
             </div>
         );
     }

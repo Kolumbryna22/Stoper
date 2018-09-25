@@ -16,17 +16,20 @@ var App = function (_React$Component) {
 
         _this.state = {
             running: false,
-            display: display
+            display: ''
         };
-        reset(false);
-        print(_this.time);
+        _this.reset(false);
+        _this.print(_this.time);
+        _this.start = _this.start.bind(_this);
+        _this.stop = _this.stop.bind(_this);
+        _this.reset = _this.reset.bind(_this);
         return _this;
     }
 
     _createClass(App, [{
         key: "reset",
         value: function reset(working) {
-            //if (working) this.addResult();
+            if (working) this.addResult();
             this.state.times = {
                 minutes: 0,
                 seconds: 0,
@@ -37,12 +40,12 @@ var App = function (_React$Component) {
     }, {
         key: "print",
         value: function print() {
-            this.state.display.innerText = this.format(this.state.times);
+            this.setState({ display: this.format(this.state.times) });
         }
     }, {
         key: "format",
         value: function format(times) {
-            return pad0(times.minutes) + ":" + pad0(times.seconds) + ":" + pad0(Math.floor(times.miliseconds));
+            return this.pad0(times.minutes) + ":" + this.pad0(times.seconds) + ":" + this.pad0(Math.floor(times.miliseconds));
         }
     }, {
         key: "start",
@@ -89,10 +92,9 @@ var App = function (_React$Component) {
         key: "addResult",
         value: function addResult() {
             var li = document.createElement("li");
+            var resultList = document.getElementById("results");
 
-            console.log(this.format(this.times));
-
-            li.innerHTML = this.format(this.times);
+            li.innerHTML = this.format(this.state.times);
             resultList.appendChild(li);
         }
     }, {
@@ -110,25 +112,29 @@ var App = function (_React$Component) {
                 { className: "stoper-container" },
                 React.createElement(
                     "div",
-                    { "class": "controls" },
+                    { className: "controls" },
                     React.createElement(
                         "a",
-                        { href: "#", className: "button", onClick: start },
+                        { href: "#", className: "button", onClick: this.start },
                         "Start"
                     ),
                     React.createElement(
                         "a",
-                        { href: "#", className: "button", onClick: stop },
+                        { href: "#", className: "button", onClick: this.stop },
                         "Stop"
                     ),
                     React.createElement(
                         "a",
-                        { href: "#", className: "button", onClick: reset(true) },
+                        { href: "#", className: "button", onClick: this.reset },
                         "Reset"
                     )
                 ),
-                React.createElement("div", { className: "stop-watch" }),
-                React.createElement("ul", { className: "results" })
+                React.createElement(
+                    "div",
+                    { className: "stop-watch" },
+                    this.state.display
+                ),
+                React.createElement("ul", { className: "results", id: "results" })
             );
         }
     }]);
